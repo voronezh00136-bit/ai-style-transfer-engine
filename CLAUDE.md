@@ -53,3 +53,9 @@ mypy .                             # Type check
 ## Remote Control Notes
 
 When working via remote control, GPU-dependent operations (training, inference) cannot be tested. Focus remote sessions on code generation, review, refactoring, and planning.
+
+## Frontend / Demo UI
+
+The core engine is a Python (PyTorch) library and CLI — it has no frontend yet. If a demo UI is added (e.g. a Gradio/Streamlit playground or a React app for uploading a content image + style image and viewing the result), put it under `web/` or `demo/`.
+
+The official `frontend-design` plugin (install via `/plugin install frontend-design@claude-plugins-official`) applies **only** to that demo UI work. It does not activate on the model/training/inference code in `models/`, `utils/`, or `transfer.py`.
