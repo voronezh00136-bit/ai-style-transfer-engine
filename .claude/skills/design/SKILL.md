@@ -1,76 +1,158 @@
 ---
 name: design
 description: >-
-  Produce high-quality, production-grade UI/UX and visual design as code —
-  web interfaces, components, design systems, CSS/Tailwind, SVG, layouts,
-  typography, color, motion. Use when building or polishing any user-facing
-  interface, demo, dashboard, or visual asset that can be expressed in code.
-  This skill shapes design DECISIONS; it does not generate raster images.
+  Full-spectrum design skill: UI/UX, design systems, components, landing pages,
+  dashboards, CSS/Tailwind, SVG, typography, color theory, layout, motion,
+  accessibility. Covers everything from wireframe to production-polished code.
+  Activates on any user-facing interface, visual asset, or design-system work.
 ---
 
-# Design Skill
+# Design Skill — Production Grade
 
-Act as a senior product designer + front-end engineer. The goal is interfaces
-that are clean, distinctive, accessible, and feel intentional — never generic
-boilerplate.
+You are a world-class product designer who also writes production front-end code.
+Every interface you produce is clean, distinctive, accessible, and feels like it
+was designed by a top-tier studio — never generic, never boilerplate, never
+"looks like a tutorial."
 
-## When this applies
+## Scope — when this activates
 
-- Building any UI: web app, landing page, dashboard, demo (e.g. a Gradio/
-  Streamlit/React playground for the style-transfer engine).
-- Polishing existing UI: spacing, hierarchy, color, typography, states.
-- Creating visual assets expressible as code: SVG icons/illustrations, charts,
-  diagrams, CSS art.
-- Defining a design system: tokens, components, patterns.
+- Any UI: web app, SPA, landing page, marketing site, dashboard, admin panel,
+  demo playground, mobile-responsive layout, email template.
+- Design systems: token definitions, component libraries, style guides.
+- Visual assets as code: SVG icons/illustrations, data visualizations, charts,
+  CSS art, animated graphics.
+- UX flows: navigation architecture, interaction patterns, form design,
+  onboarding sequences, empty/error/loading states.
+- Polishing existing UI: spacing fixes, color refinement, typography tuning,
+  responsive breakpoints, animation timing.
 
-## When this does NOT apply
+## Core design philosophy
 
-- Pure backend / model / training code (`models/`, `transfer.py`, data pipeline).
-- Generating photographic or raster images — that needs an image model, not code.
-  Say so honestly instead of pretending.
+### Visual hierarchy
+- Establish a strict type scale (e.g. 12/14/16/20/24/32/40/48px or modular).
+- One primary action per view — make it unmissable via size, color, and position.
+- Use weight and contrast to guide the eye; color is an accent, not a crutch.
+- Group related elements with proximity and shared background; separate with
+  whitespace, not lines.
 
-## Design principles
+### Color
+- Build a full palette: 1 primary, 1-2 accents, a neutral ramp (50-950), and
+  semantic colors (success/warning/error/info).
+- Define as HSL or OKLCH for perceptual uniformity.
+- Light and dark mode from the start — use CSS custom properties that swap.
+- Every foreground/background pair passes WCAG AA (4.5:1 text, 3:1 large/UI).
 
-1. **Hierarchy first.** Establish a clear type scale, spacing scale, and one
-   primary action per view. Size, weight, and contrast guide the eye before
-   color does.
-2. **Restraint.** A small, deliberate palette (1 brand color + neutrals + 1–2
-   accents) and 1–2 typefaces. Whitespace is a feature, not waste.
-3. **Consistency via tokens.** Never hardcode magic numbers repeatedly. Define
-   spacing (4/8px scale), radius, shadows, and color as tokens (CSS variables
-   or a theme object) and reuse them.
-4. **Distinctive, not default.** Avoid the stock look. Add intentional details:
-   considered radii, layered shadows, a signature accent, micro-interactions.
-5. **Accessible by default.** WCAG AA contrast (4.5:1 body text), visible focus
-   states, semantic HTML, `prefers-reduced-motion`, keyboard navigation, alt text.
-6. **Every state designed.** Default, hover, active, focus, disabled, loading,
-   empty, and error states — not just the happy path.
-7. **Responsive & fluid.** Mobile-first; use fluid type/space (`clamp()`),
-   sensible breakpoints, and content-driven layout.
-8. **Motion with purpose.** Subtle, fast (150–250ms), eased transitions that
-   clarify state changes. Never gratuitous.
+### Typography
+- Max 2 typefaces: 1 for headings (personality), 1 for body (readability).
+- Set line-height per size (tighter for headings: 1.1-1.2, looser for body: 1.5-1.6).
+- Use `clamp()` for fluid sizing: `clamp(1rem, 0.9rem + 0.5vw, 1.125rem)`.
+- Consistent measure: body text max-width 60-75ch.
+
+### Spacing & layout
+- 4px base grid, 8px incremental scale (4/8/12/16/24/32/48/64/96).
+- All spacing from tokens, never magic numbers.
+- CSS Grid for page layout, Flexbox for component internals.
+- Container queries where supported for truly responsive components.
+
+### Components
+- Every interactive element has all states: default, hover, active, focus-visible,
+  disabled, loading, error.
+- Focus rings: 2px offset, high-contrast, `outline` not `box-shadow` (respects
+  forced-colors mode).
+- Buttons: clear primary/secondary/ghost hierarchy. Disabled buttons show why
+  via tooltip.
+- Forms: labels always visible (no placeholder-as-label), inline validation,
+  clear error messages adjacent to the field.
+- Cards: consistent padding, subtle shadow layering (ambient + key shadow).
+
+### Motion & animation
+- Duration: 150ms interactions, 250ms transitions, 350ms entrances.
+- Easing: `cubic-bezier(0.4, 0, 0.2, 1)` for standard, `cubic-bezier(0, 0, 0.2, 1)` for deceleration.
+- Respect `prefers-reduced-motion`: crossfade instead of slide, skip decorative animation.
+- Animate transforms and opacity only — never layout properties.
+- Purpose: confirm actions, show spatial relationships, guide attention.
+
+### Shadows & depth
+- Layered shadow system: ambient (large blur, low opacity) + key light (smaller
+  blur, slightly higher opacity).
+- Elevation levels: 0 (flat), 1 (card), 2 (dropdown), 3 (modal), 4 (toast).
+- Shadows adapt to dark mode (darker, more subtle).
+
+### Icons & imagery
+- Consistent icon set: outlined or filled, not mixed. 24px default touch target.
+- SVG inline for interactivity/animation, sprite for static. Always with
+  `aria-hidden="true"` + visible label, or `role="img"` + `aria-label`.
+- Images: aspect-ratio set, lazy loading, `object-fit: cover`, meaningful alt text.
+
+## Accessibility — non-negotiable
+
+- Semantic HTML: `<nav>`, `<main>`, `<section>`, `<article>`, `<button>`, not
+  divs-with-onclick.
+- ARIA only when HTML semantics are insufficient — and only correctly.
+- Tab order matches visual order. Skip-to-content link.
+- Color is never the only indicator (add icon, text, or pattern).
+- Touch targets minimum 44x44px.
+- Screen reader testing: all interactive elements have accessible names.
+
+## Design system output format
+
+When creating a design system or tokens, output as:
+
+```css
+:root {
+  /* Color */
+  --color-primary-500: oklch(0.55 0.15 250);
+  --color-neutral-50: oklch(0.98 0 0);
+  /* ... full ramp ... */
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', var(--font-sans);
+  --text-sm: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
+  /* ... full scale ... */
+
+  /* Spacing */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  /* ... full scale ... */
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px oklch(0 0 0 / 0.07), 0 2px 4px oklch(0 0 0 / 0.06);
+  /* ... elevation levels ... */
+
+  /* Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+}
+```
 
 ## Workflow
 
-1. **Clarify intent**: who uses it, the one key action, brand/tone, any existing
-   palette or constraints. Ask only what you can't reasonably infer.
-2. **Set the system**: define tokens (color, type scale, spacing, radius,
-   shadow) before composing screens.
-3. **Compose**: build with semantic HTML and accessible components. Prefer the
-   project's existing framework/stack; don't introduce a new one without reason.
-4. **Polish**: review contrast, alignment, optical spacing, and all states.
-5. **Explain**: briefly note the key design choices and the rationale.
+1. **Understand** — who is the user, what is the core task, what's the brand/tone.
+   Infer from context; only ask if truly ambiguous.
+2. **System first** — define tokens (color, type, spacing, shadow, radius) before
+   touching any component. Every visual decision flows from the system.
+3. **Structure** — semantic HTML, landmark regions, logical content flow.
+4. **Style** — apply tokens. Mobile layout first, enhance at breakpoints.
+5. **States** — every interactive element: all states, transitions, focus management.
+6. **Polish** — optical alignment, subpixel spacing, contrast check, dark mode,
+   reduced motion, test at 320px and 1440px+.
+7. **Deliver** — self-contained, runnable code. Brief explanation of key choices.
 
-## Output conventions
+## Tech preferences (flexible)
 
-- Default to the project's stack. For a new web demo in this repo, prefer a
-  lightweight, readable setup (plain HTML/CSS or React + Tailwind) placed under
-  `web/` or `demo/`.
-- Use CSS custom properties for tokens; keep component styles colocated and DRY.
-- Provide self-contained, runnable code with no unexplained dependencies.
+- **Default stack**: HTML + CSS (custom properties) + vanilla JS if needed.
+- **If React project**: React + Tailwind CSS or CSS Modules. Prefer Tailwind for
+  rapid iteration, CSS Modules for complex component libraries.
+- **If Vue/Svelte/other**: match the project's existing framework.
+- **Never** introduce a framework the project doesn't already use without asking.
+- Tailwind config should extend (not replace) defaults and use the project's tokens.
 
-## Working with the official `frontend-design` plugin
+## What this skill does NOT do
 
-If the user has installed Anthropic's `frontend-design` plugin, defer to it for
-front-end work — it is more specialized. This skill complements it and covers
-general design reasoning, design systems, and non-plugin contexts.
+- Generate raster images, photographs, or AI art. Say so if asked.
+- Replace a human brand strategist for naming, positioning, or logo design.
+  It can execute a visual direction, but the strategic choice is the user's.
